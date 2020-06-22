@@ -6,13 +6,13 @@ public class NegativeDiagonalChecker extends LineChecker {
 	protected String[] getLines(String[] dna) {
 		int length = dna.length;
 
-		// Inicializando el array (TODO se puede mejorar?)
+		// Inicializando el array de diagonales
 		String[] negativeDiagonalLines = new String[length * 2 - 1];
 		for (int i = 0; i < negativeDiagonalLines.length; i++) {
 			negativeDiagonalLines[i] = "";
 		}
 
-		// LLENADO
+		// Lleanando el array con las diagonales
 		for (int i = 0; i < length; i++) {
 			String line = dna[i];
 			for (int j = 0; j < length; j++) {

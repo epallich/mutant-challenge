@@ -16,8 +16,6 @@ public abstract class AbstractLineCheckerTest {
 		log.info("Asserting that the two arrays has the same elements in any order:");
 		log.info("expected: [{}] and actual: [{}]", join(expected), join(actual));
 
-		// Assertions.assertThat
-
 		MatcherAssert.assertThat(actual, Matchers.arrayContainingInAnyOrder(expected));
 	}
 

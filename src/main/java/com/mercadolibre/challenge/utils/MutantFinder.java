@@ -3,6 +3,7 @@ package com.mercadolibre.challenge.utils;
 import com.mercadolibre.challenge.utils.checkers.HorizontalChecker;
 import com.mercadolibre.challenge.utils.checkers.LineChecker;
 import com.mercadolibre.challenge.utils.checkers.NegativeDiagonalChecker;
+import com.mercadolibre.challenge.utils.checkers.PositiveDiagonalChecker;
 import com.mercadolibre.challenge.utils.checkers.VerticalChecker;
 
 /**
@@ -15,10 +16,14 @@ public class MutantFinder implements MutantFinderInterface {
 
 	public static MutantFinder INSTANCE = new MutantFinder();
 
+	// @formatter:off
 	private MutantFinder() {
 		lineChecker = new HorizontalChecker();
-		lineChecker.linkWith(new VerticalChecker()).linkWith(new NegativeDiagonalChecker());
+		lineChecker.linkWith(new VerticalChecker())
+			.linkWith(new NegativeDiagonalChecker())
+			.linkWith(new PositiveDiagonalChecker());
 	}
+	// @formatter:on
 
 	@Override
 	public boolean isMutant(String[] dna) {
