@@ -27,10 +27,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		return new ResponseEntity<>(errors, status);
 	}
 
-	// FIXME Es necesario, no deberian retornar todas las excepciones FORBIDEN segun enunciado?
-
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleGenericException(Exception ex, WebRequest request) throws Exception {
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 }

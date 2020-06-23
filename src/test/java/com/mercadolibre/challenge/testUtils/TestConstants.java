@@ -2,6 +2,10 @@ package com.mercadolibre.challenge.testUtils;
 
 public final class TestConstants {
 
+	private TestConstants() {
+		// Do nothing
+	}
+
 	// TODO Lo correcto seria testear todos los casos en ambos sentidos, asi no esta acoplado al algoritmo elegido, sino que mientras haya
 	// un match estaria correcto
 
