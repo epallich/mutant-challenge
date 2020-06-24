@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
 import org.springframework.http.MediaType;
@@ -20,12 +20,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import com.google.common.collect.Lists;
 import com.mercadolibre.challenge.modelDto.MutantDto;
+import com.mercadolibre.challenge.testUtils.AbstractCassandraSpringBootTest;
 import com.mercadolibre.challenge.testUtils.TestConstants;
 
 @ExtendWith(SpringExtension.class)
 @AutoConfigureJsonTesters
-@WebMvcTest(MutantController.class)
-public class MutantControllerTest {
+@AutoConfigureMockMvc
+public class MutantControllerTest extends AbstractCassandraSpringBootTest {
 
 	private static final String MUST_NOT_BE_EMPTY = "must not be empty";
 	private static final String INVALID_ARRAY = "El array es invalido, vacio o nulo. Debe ser cuadrado (NxN).";
@@ -41,7 +42,7 @@ public class MutantControllerTest {
 	@Test
 	public void notNullDnaTest() throws Exception {
 		// given
-		JsonContent<MutantDto> write = jsonMutantDto.write(new MutantDto());
+		JsonContent<MutantDto> write = jsonMutantDto.write(new MutantDto(null));
 
 		// when
 		MockHttpServletResponse response = porformPost(write, status().isBadRequest());

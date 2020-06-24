@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -29,6 +32,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleGenericException(Exception ex, WebRequest request) throws Exception {
+		log.error("Internal error:", ex);
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 }

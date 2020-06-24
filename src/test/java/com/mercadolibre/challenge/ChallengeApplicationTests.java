@@ -1,10 +1,10 @@
 package com.mercadolibre.challenge;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ChallengeApplicationTests {
+import com.mercadolibre.challenge.testUtils.AbstractCassandraSpringBootTest;
+
+class ChallengeApplicationTests extends AbstractCassandraSpringBootTest {
 
 	@Test
 	void contextLoads() {
