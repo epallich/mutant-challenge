@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SquareArray {
-	String message() default "El array es invalido, vacio o nulo. Debe ser cuadrado (NxN).";
+	String message() default "The array must be square (NxN).";
 
 	Class<?>[] groups() default {};
 

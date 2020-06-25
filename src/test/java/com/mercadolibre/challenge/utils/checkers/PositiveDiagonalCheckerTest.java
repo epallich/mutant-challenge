@@ -27,8 +27,8 @@ public class PositiveDiagonalCheckerTest extends AbstractLineCheckerTest {
 		log.info("------ Not Mutant DNA");
 		assertArrayContainingInAnyOrder(TestConstants.NOT_MUTANT_POSITIVE_DIAGONAL, checker.getLines(TestConstants.NOT_MUTANT_DNA));
 
-		assertArrayContainingInAnyOrder(new String[] { "1", "32", "4" }, checker.getLines(new String[] { "12", "34" }));
-		assertArrayContainingInAnyOrder(new String[] { "1", "42", "753", "86", "9" }, checker.getLines(new String[] { "123", "456", "789" }));
-		assertArrayContainingInAnyOrder(new String[] { "A", "EB", "IFC", "MJGD", "NKH", "OL", "P" }, checker.getLines(new String[] { "ABCD", "EFGH", "IJKL", "MNOP" }));
+		assertArrayContainingInAnyOrder(new String[] {}, checker.getLines(new String[] { "12", "34" }));
+		assertArrayContainingInAnyOrder(new String[] {}, checker.getLines(new String[] { "123", "456", "789" }));
+		assertArrayContainingInAnyOrder(new String[] { "DGJM" }, checker.getLines(new String[] { "ABCD", "EFGH", "IJKL", "MNOP" }));
 	}
 }

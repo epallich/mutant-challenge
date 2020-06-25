@@ -1,34 +1,65 @@
 package com.mercadolibre.challenge.utils.checkers;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 public class NegativeDiagonalChecker extends LineChecker {
 
 	@Override
-	protected String[] getLines(String[] dna) {
-		int length = dna.length;
+	protected String[] getLines(String[] dnaArray) {
+		int length = dnaArray.length;
 
-		// Inicializando el array de diagonales
-		String[] negativeDiagonalLines = new String[length * 2 - 1];
-		for (int i = 0; i < negativeDiagonalLines.length; i++) {
-			negativeDiagonalLines[i] = "";
+		if (length < MIN_LENGTH) {
+			return new String[0];
 		}
 
-		// Lleanando el array con las diagonales
-		for (int i = 0; i < length; i++) {
-			String line = dna[i];
-			for (int j = 0; j < length; j++) {
-				int addition = i + j;
-				if (addition < length) {
-					if (j > 0) {// No tomo la diagonal ppal para no duplicarla
-						negativeDiagonalLines[j - 1] += line.charAt(addition);
-					}
+		int diagonalsAbovePrincipal = (length - MIN_LENGTH);
 
-					String line2 = dna[addition];
-					negativeDiagonalLines[length - 1 + j] += line2.charAt(i);
-				}
+		String dnaSequence = String.join("", dnaArray);
+
+		List<String> negativeDiagonalLines = Lists.newArrayList();
+		for (int i = 0 - diagonalsAbovePrincipal; i <= diagonalsAbovePrincipal; i++) {
+			if (i < 0) {
+				getUnderPrincipalDiagonal(length, dnaSequence, i, negativeDiagonalLines);
+			} else { // principal or above
+				getAbovePrincipalDiagonal(length, dnaSequence, i, negativeDiagonalLines);
 			}
 		}
 
-		return negativeDiagonalLines;
+		return negativeDiagonalLines.toArray(new String[0]);
+	}
+
+	private void getAbovePrincipalDiagonal(int length, String dnaSequence, int i, List<String> negativeDiagonalLines) {
+		String diagonal = "";
+
+		int x = 0;
+		while (getAboveIndex(length, i, x) < dnaSequence.length() && x < length - i) {
+			diagonal += dnaSequence.charAt(getAboveIndex(length, i, x));
+			x++;
+		}
+
+		negativeDiagonalLines.add(diagonal);
+	}
+
+	private int getAboveIndex(int length, int i, int x) {
+		return i + x + (x * length);
+	}
+
+	private void getUnderPrincipalDiagonal(int length, String dnaSequence, int i, List<String> negativeDiagonalLines) {
+		String diagonal = "";
+
+		int x = 0;
+		while (getIUnderIndex(length, i, x) < dnaSequence.length() && x < length + i) {
+			diagonal += dnaSequence.charAt(getIUnderIndex(length, i, x));
+			x++;
+		}
+
+		negativeDiagonalLines.add(diagonal);
+	}
+
+	private int getIUnderIndex(int length, int i, int x) {
+		return ((Math.abs(i) + x) * length) + x;
 	}
 
 }

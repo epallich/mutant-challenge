@@ -11,6 +11,8 @@ import com.mercadolibre.challenge.utils.checkers.VerticalChecker;
  * @author epallich
  */
 public class MutantFinder implements MutantFinderInterface {
+
+	// TODO
 	protected static final int MIN_LENGTH = 4;
 	protected static LineChecker lineChecker;
 

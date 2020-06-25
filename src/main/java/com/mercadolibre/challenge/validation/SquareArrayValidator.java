@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * Chequea que la longitud de todos los elementos de la lista sea igual al size de la lista (NxN)
+ * Checking the length of all the elements within the list, must be equal to the size of the list (NxN)
  * @author epallich
  */
 public class SquareArrayValidator implements ConstraintValidator<SquareArray, List<String>> {

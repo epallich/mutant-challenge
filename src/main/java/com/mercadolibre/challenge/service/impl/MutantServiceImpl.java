@@ -53,7 +53,7 @@ public class MutantServiceImpl implements MutantService {
 			ratio = BigDecimal.ZERO;
 		}
 
-		return new StatsDto(mutantCount, humanCount, ratio);
+		return new StatsDto(mutantCount, humanCount, ratio.doubleValue());
 	}
 
 }

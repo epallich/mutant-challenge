@@ -19,8 +19,8 @@ public abstract class AbstractLineCheckerTest {
 		MatcherAssert.assertThat(actual, Matchers.arrayContainingInAnyOrder(expected));
 	}
 
-	protected String join(String[] negativeDiagonalLines) {
-		return String.join(",", negativeDiagonalLines);
+	protected String join(String[] lines) {
+		return String.join(",", lines);
 	}
 
 }

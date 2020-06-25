@@ -1,11 +1,19 @@
 package com.mercadolibre.challenge.domain;
 
+import java.io.Serializable;
+
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@ToString
+@EqualsAndHashCode(of = { "type", "dna" })
+@SuppressWarnings("serial")
 @Table("person")
-public class Person {
+public class Person implements Serializable {
 
 	@PrimaryKeyColumn(name = "person_type", type = PrimaryKeyType.PARTITIONED)
 	private String type;

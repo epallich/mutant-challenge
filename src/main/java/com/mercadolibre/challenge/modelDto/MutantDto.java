@@ -1,24 +1,43 @@
 package com.mercadolibre.challenge.modelDto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+import com.mercadolibre.challenge.utils.GlobalUtils;
 import com.mercadolibre.challenge.validation.SecondCheck;
 import com.mercadolibre.challenge.validation.SquareArray;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class MutantDto {
+@ToString
+@EqualsAndHashCode
+@SuppressWarnings("serial")
+public class MutantDto implements Serializable {
 
 	@NotEmpty
 	@SquareArray(groups = SecondCheck.class)
-	private List<@NotEmpty @Pattern(regexp = "^[ATCG]*$", message = "Hay algun caracter invalido", groups = SecondCheck.class) String> dna;
+	private List<@NotEmpty @Pattern(regexp = "^[ATCG]*$", message = "There is some invalid character.", groups = SecondCheck.class) String> dna;
+
+	public MutantDto() {
+		super();
+	}
+
+	public MutantDto(final List<String> dna) {
+		super();
+		setDna(dna);
+	}
+
+	public List<String> getDna() {
+		this.dna = GlobalUtils.nullSafety(this.dna);
+		return dna;
+	}
+
+	public void setDna(final List<String> dna) {
+		this.dna = GlobalUtils.cloneNullSafety(dna);
+	}
 
 }

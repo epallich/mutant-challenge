@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.mercadolibre</groupId>
 	<artifactId>challenge</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>challenge</name>
 	<description>Challenge for Mercadolibre</description>
 
@@ -22,18 +22,19 @@
 
 		<start-class>com.mercadolibre.challenge.ChallengeApplication</start-class>
 		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-		
+
 		<cassandra.all.version>3.11.4</cassandra.all.version>
 		<cassandra.unit.spring.version>4.3.1.0</cassandra.unit.spring.version>
+		<easycoverage.version>2.3.1</easycoverage.version>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-	            <groupId>org.apache.cassandra</groupId>
-	            <artifactId>cassandra-all</artifactId>
-	            <version>${cassandra.all.version}</version>
-	        </dependency>
+				<groupId>org.apache.cassandra</groupId>
+				<artifactId>cassandra-all</artifactId>
+				<version>${cassandra.all.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -100,6 +101,28 @@
 			<artifactId>cassandra-unit-spring</artifactId>
 			<version>${cassandra.unit.spring.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- [Test] Easycoverage -->
+		<dependency>
+			<groupId>com.tocea.easycoverage</groupId>
+			<artifactId>easyCoverage4J-junit</artifactId>
+			<version>${easycoverage.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>logback-classic</artifactId>
+					<groupId>ch.qos.logback</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>junit</artifactId>
+					<groupId>junit</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
