@@ -1,5 +1,7 @@
 package com.mercadolibre.challenge.algorithm.impl.checkers;
 
+import static com.mercadolibre.challenge.ApplicationConstants.MIN_LENGTH;
+
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -7,9 +9,6 @@ import com.mercadolibre.challenge.utils.GlobalUtils;
 
 public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 
-	/**
-	 * @return Retorna el indice dentro de la secuencia concatenada de adn del elemento [i][x]
-	 */
 	protected abstract int getAboveIndex(int length, int i, int x);
 
 	protected abstract int getUnderIndex(int length, int i, int x);

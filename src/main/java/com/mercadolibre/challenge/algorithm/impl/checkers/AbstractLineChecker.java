@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class AbstractLineChecker {
 	private AbstractLineChecker next;
 
-	protected static final int MIN_LENGTH = 4;
 	protected static final int MIN_SEQUENCES = 2;
 	protected static final Pattern pattern = Pattern.compile("([A]{4})|([T]{4})|([C]{4})|([G]{4})");
 

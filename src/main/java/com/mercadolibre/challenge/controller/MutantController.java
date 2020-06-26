@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mercadolibre.challenge.domain.PersonType;
 import com.mercadolibre.challenge.modelDto.MutantDto;
 import com.mercadolibre.challenge.modelDto.StatsDto;
 import com.mercadolibre.challenge.service.MutantService;
@@ -28,7 +29,11 @@ public class MutantController {
 	public ResponseEntity<Void> isMutant(@Validated(OrderedChecks.class) @RequestBody final MutantDto mutantDto) {
 		log.info("Is mutant?: {}", mutantDto);
 
-		if (mutantFinderService.isMutant(mutantDto)) {
+		boolean isMutant = mutantFinderService.isMutant(mutantDto);
+
+		log.info("Result for [{}] = {}", mutantDto.getDna(), PersonType.getPersonType(isMutant));
+
+		if (isMutant) {
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
