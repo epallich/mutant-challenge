@@ -1,4 +1,4 @@
-package com.mercadolibre.challenge.utils;
+package com.mercadolibre.challenge.algorithm;
 
 public interface MutantFinderInterface {
 

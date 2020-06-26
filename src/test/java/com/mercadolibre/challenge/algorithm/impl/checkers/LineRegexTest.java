@@ -1,9 +1,11 @@
-package com.mercadolibre.challenge.utils.checkers;
+package com.mercadolibre.challenge.algorithm.impl.checkers;
 
 import java.util.regex.Matcher;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import com.mercadolibre.challenge.algorithm.impl.checkers.AbstractLineChecker;
 
 public class LineRegexTest {
 
@@ -69,6 +71,6 @@ public class LineRegexTest {
 	}
 
 	private Matcher getMatcher(String sequence) {
-		return LineChecker.pattern.matcher(sequence);
+		return AbstractLineChecker.pattern.matcher(sequence);
 	}
 }

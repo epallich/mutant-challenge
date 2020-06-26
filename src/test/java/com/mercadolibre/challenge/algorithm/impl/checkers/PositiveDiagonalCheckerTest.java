@@ -1,8 +1,8 @@
-package com.mercadolibre.challenge.utils.checkers;
+package com.mercadolibre.challenge.algorithm.impl.checkers;
 
 import org.junit.jupiter.api.Test;
 
-import com.mercadolibre.challenge.testUtils.TestConstants;
+import com.mercadolibre.challenge.TestConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PositiveDiagonalCheckerTest extends AbstractLineCheckerTest {
 
 	@Override
-	protected LineChecker getLineChecker() {
+	protected AbstractLineChecker getLineChecker() {
 		return new PositiveDiagonalChecker();
 	}
 
@@ -19,7 +19,7 @@ public class PositiveDiagonalCheckerTest extends AbstractLineCheckerTest {
 	public void testGetLines() {
 		log.info("--- Positive Diagonal Lines Test ---");
 
-		LineChecker checker = getLineChecker();
+		AbstractLineChecker checker = getLineChecker();
 
 		log.info("------ Mutant DNA");
 		assertArrayContainingInAnyOrder(TestConstants.MUTANT_POSITIVE_DIAGONAL, checker.getLines(TestConstants.MUTANT_DNA));

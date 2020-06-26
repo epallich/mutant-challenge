@@ -31,4 +31,13 @@ public final class GlobalUtils {
 		return list == null ? Lists.newArrayList() : list;
 	}
 
+	/**
+	 * Returns a new String composed of copies of the CharSequence elements joined together
+	 * @param elements
+	 * @return
+	 */
+	public static String join(String... elements) {
+		return elements == null ? "" : String.join("", elements);
+	}
+
 }

@@ -1,8 +1,10 @@
-package com.mercadolibre.challenge.utils.checkers;
+package com.mercadolibre.challenge.algorithm.impl.checkers;
 
 import org.junit.jupiter.api.Test;
 
-import com.mercadolibre.challenge.testUtils.TestConstants;
+import com.mercadolibre.challenge.TestConstants;
+import com.mercadolibre.challenge.algorithm.impl.checkers.HorizontalChecker;
+import com.mercadolibre.challenge.algorithm.impl.checkers.AbstractLineChecker;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HorizontalCheckerTest extends AbstractLineCheckerTest {
 
 	@Override
-	protected LineChecker getLineChecker() {
+	protected AbstractLineChecker getLineChecker() {
 		return new HorizontalChecker();
 	}
 
@@ -19,7 +21,7 @@ public class HorizontalCheckerTest extends AbstractLineCheckerTest {
 	public void testGetLines() {
 		log.info("--- Horizontal Lines Test ---");
 
-		LineChecker checker = getLineChecker();
+		AbstractLineChecker checker = getLineChecker();
 
 		log.info("------ Mutant DNA on example");
 		assertArrayContainingInAnyOrder(TestConstants.MUTANT_DNA, checker.getLines(TestConstants.MUTANT_DNA));

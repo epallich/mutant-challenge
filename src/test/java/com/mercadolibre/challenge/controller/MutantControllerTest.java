@@ -18,9 +18,9 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import com.google.common.collect.Lists;
+import com.mercadolibre.challenge.AbstractCassandraSpringBootTest;
+import com.mercadolibre.challenge.TestConstants;
 import com.mercadolibre.challenge.modelDto.MutantDto;
-import com.mercadolibre.challenge.testUtils.AbstractCassandraSpringBootTest;
-import com.mercadolibre.challenge.testUtils.TestConstants;
 
 @ExtendWith(SpringExtension.class)
 @AutoConfigureJsonTesters

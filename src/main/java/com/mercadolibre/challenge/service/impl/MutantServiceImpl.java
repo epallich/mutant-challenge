@@ -6,13 +6,13 @@ import java.math.RoundingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mercadolibre.challenge.algorithm.impl.MutantFinder;
 import com.mercadolibre.challenge.domain.Person;
 import com.mercadolibre.challenge.domain.PersonType;
 import com.mercadolibre.challenge.modelDto.MutantDto;
 import com.mercadolibre.challenge.modelDto.StatsDto;
 import com.mercadolibre.challenge.repository.PersonRepository;
 import com.mercadolibre.challenge.service.MutantService;
-import com.mercadolibre.challenge.utils.MutantFinder;
 
 @Service
 public class MutantServiceImpl implements MutantService {

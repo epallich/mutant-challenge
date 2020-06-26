@@ -1,4 +1,4 @@
-package com.mercadolibre.challenge.testUtils;
+package com.mercadolibre.challenge;
 
 import org.cassandraunit.spring.CassandraDataSet;
 import org.cassandraunit.spring.CassandraUnitDependencyInjectionTestExecutionListener;
