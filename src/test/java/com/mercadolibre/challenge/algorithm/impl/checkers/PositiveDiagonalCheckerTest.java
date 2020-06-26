@@ -1,8 +1,16 @@
 package com.mercadolibre.challenge.algorithm.impl.checkers;
 
-import org.junit.jupiter.api.Test;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_2X2;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_3X3;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_4X4;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_5X5;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_7X7;
+import static com.mercadolibre.challenge.TestConstants.MUTANT_DNA;
+import static com.mercadolibre.challenge.TestConstants.MUTANT_POSITIVE_DIAGONAL;
+import static com.mercadolibre.challenge.TestConstants.NOT_MUTANT_DNA;
+import static com.mercadolibre.challenge.TestConstants.NOT_MUTANT_POSITIVE_DIAGONAL;
 
-import com.mercadolibre.challenge.TestConstants;
+import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,13 +30,15 @@ public class PositiveDiagonalCheckerTest extends AbstractLineCheckerTest {
 		AbstractLineChecker checker = getLineChecker();
 
 		log.info("------ Mutant DNA");
-		assertArrayContainingInAnyOrder(TestConstants.MUTANT_POSITIVE_DIAGONAL, checker.getLines(TestConstants.MUTANT_DNA));
+		assertArrayContainingInAnyOrder(MUTANT_POSITIVE_DIAGONAL, checker.getLines(MUTANT_DNA));
 
 		log.info("------ Not Mutant DNA");
-		assertArrayContainingInAnyOrder(TestConstants.NOT_MUTANT_POSITIVE_DIAGONAL, checker.getLines(TestConstants.NOT_MUTANT_DNA));
+		assertArrayContainingInAnyOrder(NOT_MUTANT_POSITIVE_DIAGONAL, checker.getLines(NOT_MUTANT_DNA));
 
-		assertArrayContainingInAnyOrder(new String[] {}, checker.getLines(new String[] { "12", "34" }));
-		assertArrayContainingInAnyOrder(new String[] {}, checker.getLines(new String[] { "123", "456", "789" }));
-		assertArrayContainingInAnyOrder(new String[] { "DGJM" }, checker.getLines(new String[] { "ABCD", "EFGH", "IJKL", "MNOP" }));
+		assertArrayContainingInAnyOrder(new String[] {}, checker.getLines(ARRAY_2X2));
+		assertArrayContainingInAnyOrder(new String[] {}, checker.getLines(ARRAY_3X3));
+		assertArrayContainingInAnyOrder(new String[] { "DGJM" }, checker.getLines(ARRAY_4X4));
+		assertArrayContainingInAnyOrder(new String[] { "DHLP", "EIMQU", "JNRV" }, checker.getLines(ARRAY_5X5));
+		assertArrayContainingInAnyOrder(new String[] { "BHNT", "UAGMS", "NTZFLR", "GMSYEKQ", "FLRXDJ", "EKQWC", "DJPV" }, checker.getLines(ARRAY_7X7));
 	}
 }

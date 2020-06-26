@@ -1,10 +1,12 @@
 package com.mercadolibre.challenge.algorithm.impl.checkers;
 
-import org.junit.jupiter.api.Test;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_2X2;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_3X3;
+import static com.mercadolibre.challenge.TestConstants.ARRAY_4X4;
+import static com.mercadolibre.challenge.TestConstants.MUTANT_DNA;
+import static com.mercadolibre.challenge.TestConstants.NOT_MUTANT_DNA;
 
-import com.mercadolibre.challenge.TestConstants;
-import com.mercadolibre.challenge.algorithm.impl.checkers.HorizontalChecker;
-import com.mercadolibre.challenge.algorithm.impl.checkers.AbstractLineChecker;
+import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,14 +26,14 @@ public class HorizontalCheckerTest extends AbstractLineCheckerTest {
 		AbstractLineChecker checker = getLineChecker();
 
 		log.info("------ Mutant DNA on example");
-		assertArrayContainingInAnyOrder(TestConstants.MUTANT_DNA, checker.getLines(TestConstants.MUTANT_DNA));
+		assertArrayContainingInAnyOrder(MUTANT_DNA, checker.getLines(MUTANT_DNA));
 
 		log.info("------ Not Mutant DNA on example");
-		assertArrayContainingInAnyOrder(TestConstants.NOT_MUTANT_DNA, checker.getLines(TestConstants.NOT_MUTANT_DNA));
+		assertArrayContainingInAnyOrder(NOT_MUTANT_DNA, checker.getLines(NOT_MUTANT_DNA));
 
-		assertArrayContainingInAnyOrder(new String[] { "12", "34" }, checker.getLines(new String[] { "12", "34" }));
-		assertArrayContainingInAnyOrder(new String[] { "123", "456", "789" }, checker.getLines(new String[] { "123", "456", "789" }));
-		assertArrayContainingInAnyOrder(new String[] { "ABCD", "EFGH", "IJKL", "MNOP" }, checker.getLines(new String[] { "ABCD", "EFGH", "IJKL", "MNOP" }));
+		assertArrayContainingInAnyOrder(new String[] { "AB", "CD" }, checker.getLines(ARRAY_2X2));
+		assertArrayContainingInAnyOrder(new String[] { "ABC", "DEF", "GHI" }, checker.getLines(ARRAY_3X3));
+		assertArrayContainingInAnyOrder(new String[] { "ABCD", "EFGH", "IJKL", "MNOP" }, checker.getLines(ARRAY_4X4));
 
 	}
 

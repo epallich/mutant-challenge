@@ -11,7 +11,7 @@ public abstract class AbstractLineChecker {
 
 	protected static final int MIN_LENGTH = 4;
 	protected static final int MIN_SEQUENCES = 2;
-	protected static Pattern pattern = Pattern.compile("([A]{4})|([T]{4})|([C]{4})|([G]{4})");
+	protected static final Pattern pattern = Pattern.compile("([A]{4})|([T]{4})|([C]{4})|([G]{4})");
 
 	public AbstractLineChecker linkWith(AbstractLineChecker next) {
 		this.next = next;
