@@ -3,8 +3,7 @@ package com.mercadolibre.challenge.algorithm.impl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.mercadolibre.challenge.TestConstants;
-import com.mercadolibre.challenge.algorithm.impl.MutantFinder;
+import com.mercadolibre.challenge.test.utilities.TestConstants;
 
 import lombok.extern.slf4j.Slf4j;
 

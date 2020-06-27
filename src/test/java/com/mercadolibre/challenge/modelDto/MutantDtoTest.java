@@ -2,30 +2,16 @@ package com.mercadolibre.challenge.modelDto;
 
 import javax.validation.groups.Default;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
 import com.mercadolibre.challenge.validation.SecondCheck;
-
-import junit.framework.TestResult;
-import junit.framework.TestSuite;
 
 public class MutantDtoTest extends AbstractDtoTest<MutantDto> {
 
 	private static final String PATTERN_MESSAGE = "There is some invalid character.";
 	private static final String NOT_EMPTY_MESSAGE = "{javax.validation.constraints.NotEmpty.message}";
 	private static final String SQUARE_MESSAGE = "The array must be square (NxN).";
-
-	@Test
-	public void testMutantDtoClass() {
-		TestResult result = new TestResult();
-
-		TestSuite testSuite = getTestSuite(MutantDto.class);
-		testSuite.run(result);
-
-		Assertions.assertThat(result.wasSuccessful()).isTrue();
-	}
 
 	@Test
 	public void notNullDnaTest() throws Exception {

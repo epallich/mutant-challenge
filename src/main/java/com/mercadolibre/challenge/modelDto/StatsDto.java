@@ -5,54 +5,52 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @ToString
-@EqualsAndHashCode
 @SuppressWarnings("serial")
 public class StatsDto implements Serializable {
 
 	@JsonProperty("count_mutant_dna")
-	private long mutantCount;
+	private Long mutantCount;
 
 	@JsonProperty("count_human_dna")
-	private long humanCount;
+	private Long humanCount;
 
-	private double ratio;
+	private BigDecimal ratio;
 
 	public StatsDto() {
 		super();
 	}
 
-	public StatsDto(final long mutantCount, final long humanCount, final double ratio) {
+	public StatsDto(final Long mutantCount, final Long humanCount, final BigDecimal ratio) {
 		super();
 		this.mutantCount = mutantCount;
 		this.humanCount = humanCount;
 		this.ratio = ratio;
 	}
 
-	public long getMutantCount() {
+	public Long getMutantCount() {
 		return mutantCount;
 	}
 
-	public void setMutantCount(final long mutantCount) {
+	public void setMutantCount(final Long mutantCount) {
 		this.mutantCount = mutantCount;
 	}
 
-	public long getHumanCount() {
+	public Long getHumanCount() {
 		return humanCount;
 	}
 
-	public void setHumanCount(final long humanCount) {
+	public void setHumanCount(final Long humanCount) {
 		this.humanCount = humanCount;
 	}
 
-	public double getRatio() {
+	public BigDecimal getRatio() {
 		return ratio;
 	}
 
-	public void setRatio(final double ratio) {
+	public void setRatio(final BigDecimal ratio) {
 		this.ratio = ratio;
 	}
 

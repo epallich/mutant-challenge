@@ -5,8 +5,6 @@ import java.util.regex.Matcher;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.mercadolibre.challenge.algorithm.impl.checkers.AbstractLineChecker;
-
 public class LineRegexTest {
 
 	private static final String AAAA = "AAAA";

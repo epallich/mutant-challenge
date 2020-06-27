@@ -8,14 +8,14 @@ public class PersonTest {
 
 	@Test
 	public void testEqualsAndHashCode() throws Exception {
-		String human = PersonType.HUMAN.name();
+		String normal = PersonType.NORMAL.name();
 		String mutant = PersonType.MUTANT.name();
 
 		String dna1 = "ABCDEF";
 		String dna2 = "BCDEFG";
 
-		Person person1 = new Person(human, dna1);
-		Person person1Clon = new Person(human, dna1);
+		Person person1 = new Person(normal, dna1);
+		Person person1Clon = new Person(normal, dna1);
 
 		Person person2 = new Person(mutant, dna2);
 

@@ -11,11 +11,6 @@ import com.mercadolibre.challenge.algorithm.impl.checkers.VerticalChecker;
 
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * You will know if a human is mutant,
- * if you find more than one sequence of four equal letters, obliquely, horizontally or vertically.
- * @author epallich
- */
 @Slf4j
 public class MutantFinder implements MutantFinderInterface {
 
@@ -35,7 +30,7 @@ public class MutantFinder implements MutantFinderInterface {
 	// @formatter:on
 
 	@Override
-	public boolean isMutant(String[] dna) {
+	public boolean isMutant(final String[] dna) {
 		log.info("Checking DNA: [{}]", String.join(",", dna));
 		if (dna.length < MIN_LENGTH)
 			return false;

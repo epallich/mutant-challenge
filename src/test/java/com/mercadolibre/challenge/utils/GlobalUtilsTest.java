@@ -40,5 +40,6 @@ public class GlobalUtilsTest {
 	public void testJoin() throws Exception {
 		assertThat(GlobalUtils.join("1", "2")).hasSize(2).containsSequence("1", "2").doesNotStartWith("2");
 		assertThat(GlobalUtils.join()).isNotNull().isEmpty();
+		assertThat(GlobalUtils.join((String[]) null)).isNotNull().isEmpty();
 	}
 }

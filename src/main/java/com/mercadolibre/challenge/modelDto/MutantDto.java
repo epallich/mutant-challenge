@@ -10,11 +10,9 @@ import com.mercadolibre.challenge.utils.GlobalUtils;
 import com.mercadolibre.challenge.validation.SecondCheck;
 import com.mercadolibre.challenge.validation.SquareArray;
 
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @ToString
-@EqualsAndHashCode
 @SuppressWarnings("serial")
 public class MutantDto implements Serializable {
 

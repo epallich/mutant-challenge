@@ -1,4 +1,4 @@
-package com.mercadolibre.challenge;
+package com.mercadolibre.challenge.test.utilities;
 
 public final class TestConstants {
 

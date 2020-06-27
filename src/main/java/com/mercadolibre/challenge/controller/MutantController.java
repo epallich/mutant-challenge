@@ -23,13 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 public class MutantController {
 
 	@Autowired
-	private MutantService mutantFinderService;
+	private MutantService mutantService;
 
 	@RequestMapping(value = "/mutant", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> isMutant(@Validated(OrderedChecks.class) @RequestBody final MutantDto mutantDto) {
 		log.info("Is mutant?: {}", mutantDto);
 
-		boolean isMutant = mutantFinderService.isMutant(mutantDto);
+		boolean isMutant = mutantService.isMutant(mutantDto);
 
 		log.info("Result for [{}] = {}", mutantDto.getDna(), PersonType.getPersonType(isMutant));
 
@@ -43,7 +43,7 @@ public class MutantController {
 	public ResponseEntity<StatsDto> stats() {
 		log.info("Getting stats");
 
-		StatsDto statsDto = mutantFinderService.getStats();
+		StatsDto statsDto = mutantService.getStats();
 
 		log.info("Returning stats: {}", statsDto);
 		return ResponseEntity.ok(statsDto);

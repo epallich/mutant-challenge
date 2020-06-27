@@ -47,22 +47,30 @@ public class MutantServiceImpl implements MutantService {
 	@Override
 	public StatsDto getStats() {
 		Long mutantCount = personRepository.countByType(PersonType.MUTANT.name());
-		Long humanCount = personRepository.countByType(PersonType.HUMAN.name());
+		Long normalCount = personRepository.countByType(PersonType.NORMAL.name());
 
-		return toStatDto(mutantCount, humanCount);
+		return toStatDto(mutantCount, mutantCount + normalCount);
 	}
 
 	private StatsDto toStatDto(Long mutantCount, Long humanCount) {
-		BigDecimal ratio = null;
+		return new StatsDto(mutantCount, humanCount, getRatio(mutantCount, humanCount));
+	}
+
+	/**
+	 * Returns the calculated ratio
+	 * Mutant count / Human count
+	 * -- 0 / 0 -> 0
+	 * -- x / y -> the division rounded
+	 * @param mutantCount
+	 * @param humanCount
+	 * @return
+	 */
+	private BigDecimal getRatio(Long mutantCount, Long humanCount) {
+		BigDecimal ratio = BigDecimal.ZERO;
 		if (humanCount > 0) {
 			ratio = BigDecimal.valueOf(mutantCount).divide(BigDecimal.valueOf(humanCount), 2, RoundingMode.HALF_UP);
-		} else if (mutantCount > 0) {
-			ratio = BigDecimal.ONE;
-		} else {
-			ratio = BigDecimal.ZERO;
 		}
-
-		return new StatsDto(mutantCount, humanCount, ratio.doubleValue());
+		return ratio;
 	}
 
 }

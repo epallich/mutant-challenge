@@ -4,7 +4,8 @@ public final class HorizontalChecker extends AbstractLineChecker {
 
 	@Override
 	protected final String[] getLines(String[] dna) {
-		return dna;
+
+		return dna.clone();
 	}
 
 }

@@ -9,68 +9,85 @@ import com.mercadolibre.challenge.utils.GlobalUtils;
 
 public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 
-	protected abstract int getAboveIndex(int length, int i, int x);
+	/**
+	 * Calculate and return the element[pivot] of the new line
+	 * @param length
+	 * The length of the line
+	 * @param offset
+	 * The diagonal index (4-N,N-4), at this moment the offset is positive or zero
+	 * @param pivot
+	 * The actual element index of the new line
+	 * @return
+	 */
+	protected abstract int getAboveIndex(int length, int offset, int pivot);
 
-	protected abstract int getUnderIndex(int length, int i, int x);
+	/**
+	 * Calculate and return the element[pivot] of the new line
+	 * @param length
+	 * The length of the line
+	 * @param offset
+	 * The diagonal index (4-N,N-4), at this moment the offset is always negative
+	 * @param pivot
+	 * The actual element index of the new line
+	 * @return
+	 */
+	protected abstract int getUnderIndex(int length, int offset, int pivot);
 
 	@Override
 	protected final String[] getLines(String[] dnaArray) {
 		int length = dnaArray.length;
 
-		if (length < MIN_LENGTH) {
-			return new String[0];
-		}
-
 		final String dnaSequence = GlobalUtils.join(dnaArray);
 		final int diagonalsAbovePrincipal = (length - MIN_LENGTH);
 		final List<String> diagonalLines = Lists.newArrayList();
 
-		for (int i = -diagonalsAbovePrincipal; i <= diagonalsAbovePrincipal; i++) {
-			if (i >= 0) {
-				getAbovePrincipalDiagonal(length, dnaSequence, i, diagonalLines);
-			} else {
-				getUnderPrincipalDiagonal(length, dnaSequence, i, diagonalLines);
-			}
+		for (int offset = -diagonalsAbovePrincipal; offset <= diagonalsAbovePrincipal; offset++) {
+			diagonalLines.add(getDiagonalLine(length, dnaSequence, offset));
 		}
 
 		return diagonalLines.toArray(new String[0]);
 	}
 
-	private void getAbovePrincipalDiagonal(int length, String dnaSequence, int i, List<String> diagonals) {
+	/**
+	 * @param length
+	 * The length of the dna array (N)
+	 * @param dnaSequence
+	 * The concatenated dna sequence
+	 * @param offset
+	 * The diagonal index (4-N,N-4)
+	 */
+	private String getDiagonalLine(int length, String dnaSequence, int offset) {
 		String diagonal = "";
 
-		int x = 0;
-		while (getAboveIndex(length, i, x) < dnaSequence.length() && checkDiagonalLength(length, i, x)) {
-			diagonal += dnaSequence.charAt(getAboveIndex(length, i, x));
-			x++;
+		// If the offset is positive or zero, call the getAboveIndex
+		// otherwise call the getUnderIndex
+		IndexOperator indexOperator = (p) -> offset >= 0 ? this.getAboveIndex(length, offset, p) : this.getUnderIndex(length, offset, p);
+
+		int pivot = 0;
+		int index = 0;
+		while ((index = indexOperator.getIndex(pivot)) < dnaSequence.length() && checkDiagonalLength(length, offset, pivot)) {
+			diagonal += dnaSequence.charAt(index);
+			pivot++;
 		}
 
-		diagonals.add(diagonal);
+		return diagonal;
 	}
 
-	private void getUnderPrincipalDiagonal(int length, String dnaSequence, int i, List<String> diagonals) {
-		String diagonal = "";
-
-		int x = 0;
-		while (getUnderIndex(length, i, x) < dnaSequence.length() && checkDiagonalLength(length, i, x)) {
-			diagonal += dnaSequence.charAt(getUnderIndex(length, i, x));
-			x++;
-		}
-
-		diagonals.add(diagonal);
+	private interface IndexOperator {
+		public int getIndex(int pivot);
 	}
 
 	/**
-	 * Checks the lenth of the new diagonal in order to take the exact number of elements from the dnaSequence
+	 * Checks the length of the new diagonal in order to take the exact number of elements from the dnaSequence
 	 * @param length
 	 * The length of the line
-	 * @param i
-	 * The diagonal index (-n,n)
-	 * @param x
+	 * @param offset
+	 * The diagonal index (4-N,N-4)
+	 * @param pivot
 	 * The actual element index of the new line
 	 * @return
 	 */
-	private boolean checkDiagonalLength(int length, int i, int x) {
-		return x < length - Math.abs(i);
+	private boolean checkDiagonalLength(int length, int offset, int pivot) {
+		return pivot < length - Math.abs(offset);
 	}
 }

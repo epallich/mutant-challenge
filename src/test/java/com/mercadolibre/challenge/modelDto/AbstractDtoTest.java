@@ -14,19 +14,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
-import com.tocea.easycoverage.framework.checkers.ArrayIndexOutOfBoundExceptionChecker;
-import com.tocea.easycoverage.framework.checkers.BijectiveCompareToChecker;
-import com.tocea.easycoverage.framework.checkers.BijectiveEqualsChecker;
-import com.tocea.easycoverage.framework.checkers.CloneChecker;
-import com.tocea.easycoverage.framework.checkers.NPEConstructorChecker;
-import com.tocea.easycoverage.framework.checkers.NPEMethodChecker;
-import com.tocea.easycoverage.framework.checkers.NullValueEqualsChecker;
-import com.tocea.easycoverage.framework.checkers.SetterChecker;
-import com.tocea.easycoverage.framework.checkers.ToStringNotNullChecker;
-import com.tocea.easycoverage.framework.junit.JUnitTestSuiteProvider;
-
-import junit.framework.TestSuite;
-
 public abstract class AbstractDtoTest<T> {
 
 	protected static Validator validator;
@@ -65,25 +52,6 @@ public abstract class AbstractDtoTest<T> {
 	protected void doValidationWithoutErrors(final T dto, final Class<?>... groups) {
 		final Set<ConstraintViolation<T>> violations = validator.validate(dto, groups);
 		Assert.assertTrue(violations.isEmpty());
-	}
-
-	protected TestSuite getTestSuite(Class<T> clazz) {
-		JUnitTestSuiteProvider testSuiteProvider = new JUnitTestSuiteProvider();
-
-		testSuiteProvider.addClass(clazz);
-
-		testSuiteProvider.addClassChecker(ToStringNotNullChecker.class);
-		testSuiteProvider.addClassChecker(BijectiveCompareToChecker.class);
-		testSuiteProvider.addClassChecker(BijectiveEqualsChecker.class);
-		testSuiteProvider.addClassChecker(CloneChecker.class);
-		testSuiteProvider.addClassChecker(NPEConstructorChecker.class);
-		testSuiteProvider.addClassChecker(NullValueEqualsChecker.class);
-
-		testSuiteProvider.addMethodChecker(NPEMethodChecker.class);
-		testSuiteProvider.addMethodChecker(SetterChecker.class);
-		testSuiteProvider.addMethodChecker(ArrayIndexOutOfBoundExceptionChecker.class);
-
-		return testSuiteProvider.getTestSuite();
 	}
 
 }

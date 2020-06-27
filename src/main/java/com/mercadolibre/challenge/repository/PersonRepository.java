@@ -10,6 +10,6 @@ public interface PersonRepository extends CassandraRepository<Person, String> {
 
 	// countByType
 
-	public Long countByType(final String type);
+	public long countByType(final String type);
 
 }

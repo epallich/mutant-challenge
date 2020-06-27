@@ -14,11 +14,11 @@ public final class VerticalChecker extends AbstractLineChecker {
 		final String dnaSequence = GlobalUtils.join(dnaArray);
 		final List<String> verticalLines = Lists.newArrayList();
 
-		for (int i = 0; i < length; i++) {
+		for (int offset = 0; offset < length; offset++) {
 
 			String line = "";
-			for (int x = 0; x < length; x++) {
-				line += dnaSequence.charAt(getIndex(length, i, x));
+			for (int pivot = 0; pivot < length; pivot++) {
+				line += dnaSequence.charAt(getIndex(length, offset, pivot));
 			}
 			verticalLines.add(line);
 		}
@@ -26,8 +26,18 @@ public final class VerticalChecker extends AbstractLineChecker {
 		return verticalLines.toArray(new String[0]);
 	}
 
-	private int getIndex(int length, int i, int x) {
-		return (length * x) + i;
+	/**
+	 * Calculate and return the element[pivot] of the new line
+	 * @param length
+	 * The length of the line
+	 * @param offset
+	 * The vertical index (0,N)
+	 * @param pivot
+	 * The actual element index of the new line
+	 * @return
+	 */
+	private int getIndex(int length, int offset, int pivot) {
+		return (length * pivot) + offset;
 	}
 
 }
