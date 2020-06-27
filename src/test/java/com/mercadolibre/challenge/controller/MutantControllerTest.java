@@ -22,8 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.mercadolibre.challenge.domain.Person;
 import com.mercadolibre.challenge.domain.PersonType;
-import com.mercadolibre.challenge.modelDto.MutantDto;
-import com.mercadolibre.challenge.modelDto.StatsDto;
+import com.mercadolibre.challenge.dto.MutantDto;
+import com.mercadolibre.challenge.dto.StatsDto;
 import com.mercadolibre.challenge.repository.PersonRepository;
 import com.mercadolibre.challenge.test.utilities.AbstractCassandraSpringBootTest;
 

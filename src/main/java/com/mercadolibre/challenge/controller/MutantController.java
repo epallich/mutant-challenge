@@ -5,14 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mercadolibre.challenge.domain.PersonType;
-import com.mercadolibre.challenge.modelDto.MutantDto;
-import com.mercadolibre.challenge.modelDto.StatsDto;
+import com.mercadolibre.challenge.dto.MutantDto;
+import com.mercadolibre.challenge.dto.StatsDto;
 import com.mercadolibre.challenge.service.MutantService;
 import com.mercadolibre.challenge.validation.OrderedChecks;
 
@@ -25,7 +25,7 @@ public class MutantController {
 	@Autowired
 	private MutantService mutantService;
 
-	@RequestMapping(value = "/mutant", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/mutant", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> isMutant(@Validated(OrderedChecks.class) @RequestBody final MutantDto mutantDto) {
 		log.info("Is mutant?: {}", mutantDto);
 
@@ -39,7 +39,7 @@ public class MutantController {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 	}
 
-	@RequestMapping(value = "/stats", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StatsDto> stats() {
 		log.info("Getting stats");
 

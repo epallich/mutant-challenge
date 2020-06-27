@@ -13,7 +13,7 @@ public class SquareArrayValidator implements ConstraintValidator<SquareArray, Li
 
 	@Override
 	public boolean isValid(List<String> value, ConstraintValidatorContext context) {
-		if (value != null && value.size() > 0)
+		if (value != null && !value.isEmpty())
 			return value.stream().map(String::length).distinct().allMatch(x -> x == value.size());
 
 		return false;

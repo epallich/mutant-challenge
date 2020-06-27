@@ -15,12 +15,12 @@ public final class VerticalChecker extends AbstractLineChecker {
 		final List<String> verticalLines = Lists.newArrayList();
 
 		for (int offset = 0; offset < length; offset++) {
+			StringBuilder diagonal = new StringBuilder();
 
-			String line = "";
 			for (int pivot = 0; pivot < length; pivot++) {
-				line += dnaSequence.charAt(getIndex(length, offset, pivot));
+				diagonal.append(dnaSequence.charAt(getIndex(length, offset, pivot)));
 			}
-			verticalLines.add(line);
+			verticalLines.add(diagonal.toString());
 		}
 
 		return verticalLines.toArray(new String[0]);

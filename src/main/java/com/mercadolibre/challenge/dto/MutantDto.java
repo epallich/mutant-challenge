@@ -1,4 +1,4 @@
-package com.mercadolibre.challenge.modelDto;
+package com.mercadolibre.challenge.dto;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,10 +1,11 @@
-package com.mercadolibre.challenge.modelDto;
+package com.mercadolibre.challenge.dto;
 
 import javax.validation.groups.Default;
 
 import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
+import com.mercadolibre.challenge.dto.MutantDto;
 import com.mercadolibre.challenge.validation.SecondCheck;
 
 public class MutantDtoTest extends AbstractDtoTest<MutantDto> {

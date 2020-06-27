@@ -9,14 +9,16 @@ import com.mercadolibre.challenge.algorithm.impl.checkers.NegativeDiagonalChecke
 import com.mercadolibre.challenge.algorithm.impl.checkers.PositiveDiagonalChecker;
 import com.mercadolibre.challenge.algorithm.impl.checkers.VerticalChecker;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Getter
 public class MutantFinder implements MutantFinderInterface {
 
-	protected static AbstractLineChecker lineChecker;
+	private static AbstractLineChecker lineChecker;
 
-	public static MutantFinder INSTANCE = new MutantFinder();
+	public static final MutantFinder INSTANCE = new MutantFinder();
 
 	// @formatter:off
 	

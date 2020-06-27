@@ -19,7 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.mercadolibre.challenge.controller.MutantController;
-import com.mercadolibre.challenge.modelDto.MutantDto;
+import com.mercadolibre.challenge.dto.MutantDto;
 import com.mercadolibre.challenge.service.MutantService;
 
 @ExtendWith(SpringExtension.class)

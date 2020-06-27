@@ -57,20 +57,20 @@ public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 	 * The diagonal index (4-N,N-4)
 	 */
 	private String getDiagonalLine(int length, String dnaSequence, int offset) {
-		String diagonal = "";
+		StringBuilder diagonal = new StringBuilder();
 
 		// If the offset is positive or zero, call the getAboveIndex
 		// otherwise call the getUnderIndex
-		IndexOperator indexOperator = (p) -> offset >= 0 ? this.getAboveIndex(length, offset, p) : this.getUnderIndex(length, offset, p);
+		IndexOperator indexOperator = p -> offset >= 0 ? this.getAboveIndex(length, offset, p) : this.getUnderIndex(length, offset, p);
 
 		int pivot = 0;
 		int index = 0;
 		while ((index = indexOperator.getIndex(pivot)) < dnaSequence.length() && checkDiagonalLength(length, offset, pivot)) {
-			diagonal += dnaSequence.charAt(index);
+			diagonal.append(dnaSequence.charAt(index));
 			pivot++;
 		}
 
-		return diagonal;
+		return diagonal.toString();
 	}
 
 	private interface IndexOperator {

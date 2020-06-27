@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import com.google.common.collect.Lists;
-import com.mercadolibre.challenge.modelDto.MutantDto;
+import com.mercadolibre.challenge.dto.MutantDto;
 
 public final class MvcControllerTestsUtils {
 

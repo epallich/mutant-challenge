@@ -1,7 +1,7 @@
 package com.mercadolibre.challenge.service;
 
-import com.mercadolibre.challenge.modelDto.MutantDto;
-import com.mercadolibre.challenge.modelDto.StatsDto;
+import com.mercadolibre.challenge.dto.MutantDto;
+import com.mercadolibre.challenge.dto.StatsDto;
 
 public interface MutantService {
 
