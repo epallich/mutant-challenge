@@ -9,6 +9,10 @@ import org.springframework.data.cassandra.core.mapping.Table;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/**
+ * The Person table definition<br>
+ * Note that this table does not accept repeated entities since its two attributes are keys to the table
+ */
 @ToString
 @EqualsAndHashCode(of = { "type", "dna" })
 @SuppressWarnings("serial")

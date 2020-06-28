@@ -10,6 +10,24 @@ import com.mercadolibre.challenge.utils.GlobalUtils;
 public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 
 	/**
+	 * This operator is used to choose the index method based on the offset in
+	 * {@link AbstractDiagonalChecker#getDiagonalLine(int, String, int)
+	 * getDiagonalLine} <br>
+	 * If the offset is positive or zero, uses {@link AbstractDiagonalChecker#getAboveIndex(int, int, int) getAboveIndex}<br>
+	 * If the offset is negative, uses {@link AbstractDiagonalChecker#getUnderIndex(int, int, int) getUnderIndex}<br>
+	 */
+	private interface IndexOperator {
+		/**
+		 * Calculate and return the element[pivot] of the new line
+		 * @param pivot
+		 * The actual element index of the new line
+		 * @return
+		 * The calculated index
+		 */
+		public int getIndex(int pivot);
+	}
+
+	/**
 	 * Calculate and return the element[pivot] of the new line
 	 * @param length
 	 * The length of the line
@@ -18,6 +36,7 @@ public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 	 * @param pivot
 	 * The actual element index of the new line
 	 * @return
+	 * The calculated index
 	 */
 	protected abstract int getAboveIndex(int length, int offset, int pivot);
 
@@ -30,9 +49,13 @@ public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 	 * @param pivot
 	 * The actual element index of the new line
 	 * @return
+	 * The calculated index
 	 */
 	protected abstract int getUnderIndex(int length, int offset, int pivot);
 
+	/**
+	 * Returns the diagonal lines
+	 */
 	@Override
 	protected final String[] getLines(String[] dnaArray) {
 		int length = dnaArray.length;
@@ -55,6 +78,8 @@ public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 	 * The concatenated dna sequence
 	 * @param offset
 	 * The diagonal index (4-N,N-4)
+	 * @return
+	 * The diagonal line
 	 */
 	private String getDiagonalLine(int length, String dnaSequence, int offset) {
 		StringBuilder diagonal = new StringBuilder();
@@ -73,10 +98,6 @@ public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 		return diagonal.toString();
 	}
 
-	private interface IndexOperator {
-		public int getIndex(int pivot);
-	}
-
 	/**
 	 * Checks the length of the new diagonal in order to take the exact number of elements from the dnaSequence
 	 * @param length
@@ -86,6 +107,7 @@ public abstract class AbstractDiagonalChecker extends AbstractLineChecker {
 	 * @param pivot
 	 * The actual element index of the new line
 	 * @return
+	 * true if the pivot element belongs to the offset line
 	 */
 	private boolean checkDiagonalLength(int length, int offset, int pivot) {
 		return pivot < length - Math.abs(offset);

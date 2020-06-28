@@ -1,15 +1,22 @@
 package com.mercadolibre.challenge.algorithm.impl.checkers;
 
+import static com.mercadolibre.challenge.ApplicationConstants.MIN_SEQUENCES;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Abstract checker
+ * Find the lines and then check them with the pattern
+ * @author epallich
+ */
+
 @Slf4j
 public abstract class AbstractLineChecker {
 	private AbstractLineChecker next;
 
-	protected static final int MIN_SEQUENCES = 2;
 	protected static final Pattern pattern = Pattern.compile("([A]{4})|([T]{4})|([C]{4})|([G]{4})");
 
 	public AbstractLineChecker linkWith(AbstractLineChecker next) {
@@ -18,10 +25,11 @@ public abstract class AbstractLineChecker {
 	}
 
 	/**
-	 * Returns the lines of the new perspective
+	 * Get the lines of the new perspective
 	 * @param dna
 	 * The dna array
 	 * @return
+	 * the new lines
 	 */
 	protected abstract String[] getLines(String[] dna);
 
@@ -31,8 +39,11 @@ public abstract class AbstractLineChecker {
 	 * If not, delegates the task to the next checker <br>
 	 * If no more checkers, returns false <br>
 	 * @param dna
+	 * The dna array
 	 * @param amountOfSequences
+	 * The amount of sequences found until this moment (starts in 0)
 	 * @return
+	 * true if the dna belongs to a mutant or false if not
 	 */
 	public boolean checkDnaSequence(final String[] dna, int amountOfSequences) {
 
@@ -50,8 +61,11 @@ public abstract class AbstractLineChecker {
 	 * Checks the lines with the Pattern and return the amount of sequences found <br>
 	 * If the amount is equals to the MIN_SEQUENCES returns that value
 	 * @param sequence
+	 * The sequence array to check
 	 * @param amountOfSequences
+	 * The amount of sequences found until this moment
 	 * @return
+	 * The number of sequences passed as a parameter added to the sequences found in this method
 	 */
 	protected int checkLines(String[] sequence, int amountOfSequences) {
 		int index = 0;

@@ -15,19 +15,19 @@ public class MutantFinderTest {
 		log.info("--- Is Mutant Test True ---");
 
 		log.info("------ Mutant DNA on example");
-		Assertions.assertTrue(MutantFinder.INSTANCE.isMutant(TestConstants.MUTANT_DNA));
+		Assertions.assertTrue(MutantFinderImpl.INSTANCE.isMutant(TestConstants.MUTANT_DNA));
 
 		// Dos secuencias (ambas diagonales)
-		Assertions.assertTrue(MutantFinder.INSTANCE.isMutant(new String[] { "CACA", "CCAT", "GACT", "AGAC" }));
+		Assertions.assertTrue(MutantFinderImpl.INSTANCE.isMutant(new String[] { "CACA", "CCAT", "GACT", "AGAC" }));
 
 		// Dos secuencias (ambas horizontales)
-		Assertions.assertTrue(MutantFinder.INSTANCE.isMutant(new String[] { "ATCG", "TTTT", "ATCG", "GGGG" }));
+		Assertions.assertTrue(MutantFinderImpl.INSTANCE.isMutant(new String[] { "ATCG", "TTTT", "ATCG", "GGGG" }));
 
 		// Dos secuencias (ambas verticales)
-		Assertions.assertTrue(MutantFinder.INSTANCE.isMutant(new String[] { "ATCG", "ATTG", "ATCG", "AGGG" }));
+		Assertions.assertTrue(MutantFinderImpl.INSTANCE.isMutant(new String[] { "ATCG", "ATTG", "ATCG", "AGGG" }));
 
 		// Tres secuencias (El algoritmo encuentra dos y retorna)
-		Assertions.assertTrue(MutantFinder.INSTANCE.isMutant(new String[] { "AAAA", "CCCC", "ACAC", "GGGG" }));
+		Assertions.assertTrue(MutantFinderImpl.INSTANCE.isMutant(new String[] { "AAAA", "CCCC", "ACAC", "GGGG" }));
 	}
 
 	@Test
@@ -35,16 +35,16 @@ public class MutantFinderTest {
 		log.info("--- Is Mutant Test False (HUMANS)---");
 
 		log.info("------ Not Mutant DNA on example");
-		Assertions.assertFalse(MutantFinder.INSTANCE.isMutant(TestConstants.NOT_MUTANT_DNA));
+		Assertions.assertFalse(MutantFinderImpl.INSTANCE.isMutant(TestConstants.NOT_MUTANT_DNA));
 
 		// Tamaño de array menor a 4x4
-		Assertions.assertFalse(MutantFinder.INSTANCE.isMutant(new String[] { "TAC", "CCA", "GGC" }));
+		Assertions.assertFalse(MutantFinderImpl.INSTANCE.isMutant(new String[] { "TAC", "CCA", "GGC" }));
 
 		// Ninguna secuencia
-		Assertions.assertFalse(MutantFinder.INSTANCE.isMutant(new String[] { "TACA", "CCAT", "GGCT", "AGAT" }));
+		Assertions.assertFalse(MutantFinderImpl.INSTANCE.isMutant(new String[] { "TACA", "CCAT", "GGCT", "AGAT" }));
 
 		// Solo una secuencia
-		Assertions.assertFalse(MutantFinder.INSTANCE.isMutant(new String[] { "TACA", "CCAT", "GACT", "AGAT" }));
+		Assertions.assertFalse(MutantFinderImpl.INSTANCE.isMutant(new String[] { "TACA", "CCAT", "GACT", "AGAT" }));
 	}
 
 }

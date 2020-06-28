@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.mercadolibre</groupId>
 	<artifactId>challenge</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>challenge</name>
 	<description>Challenge for Mercadolibre</description>
 
@@ -26,6 +26,8 @@
 		<cassandra.all.version>3.11.4</cassandra.all.version>
 		<cassandra.unit.spring.version>4.3.1.0</cassandra.unit.spring.version>
 		<easycoverage.version>2.3.1</easycoverage.version>
+
+		<maven.site.plugin.version>3.7.1</maven.site.plugin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -60,12 +62,6 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -114,6 +110,18 @@
 		</dependency>
 
 	</dependencies>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<show>private</show>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<build>
 		<resources>
@@ -124,6 +132,15 @@
 		</resources>
 
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${maven.site.plugin.version}</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>

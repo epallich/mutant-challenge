@@ -12,17 +12,24 @@ import com.mercadolibre.challenge.algorithm.impl.checkers.VerticalChecker;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Mutant finder implementation
+ * @author epallich
+ */
 @Slf4j
 @Getter
-public class MutantFinder implements MutantFinderInterface {
+public class MutantFinderImpl implements MutantFinderInterface {
 
 	private static AbstractLineChecker lineChecker;
 
-	public static final MutantFinder INSTANCE = new MutantFinder();
+	public static final MutantFinderImpl INSTANCE = new MutantFinderImpl();
 
 	// @formatter:off
 	
-	private MutantFinder() {
+	/**
+	 * Creates a sequencial chain of checkers
+	 */
+	private MutantFinderImpl() {
 		lineChecker = new HorizontalChecker();
 		lineChecker.linkWith(new VerticalChecker())
 			.linkWith(new NegativeDiagonalChecker())

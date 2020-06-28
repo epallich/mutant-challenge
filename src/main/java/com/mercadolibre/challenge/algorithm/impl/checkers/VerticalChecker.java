@@ -7,6 +7,9 @@ import com.mercadolibre.challenge.utils.GlobalUtils;
 
 public final class VerticalChecker extends AbstractLineChecker {
 
+	/**
+	 * Returns the vertical lines
+	 */
 	@Override
 	protected final String[] getLines(String[] dnaArray) {
 		int length = dnaArray.length;
@@ -35,6 +38,7 @@ public final class VerticalChecker extends AbstractLineChecker {
 	 * @param pivot
 	 * The actual element index of the new line
 	 * @return
+	 * The calculated index
 	 */
 	private int getIndex(int length, int offset, int pivot) {
 		return (length * pivot) + offset;

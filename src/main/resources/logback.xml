@@ -34,8 +34,8 @@
         </rollingPolicy>
     </appender>
      
-    <!-- LOG "com.mercadolibre.challenge*" at DEBUG level -->
-    <logger name="com.mercadolibre.challenge" level="debug" additivity="false">
+    <!-- LOG "com.mercadolibre.challenge*" at info level -->
+    <logger name="com.mercadolibre.challenge" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="LOGFILE" />
     </logger>

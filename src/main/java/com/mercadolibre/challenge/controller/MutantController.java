@@ -25,6 +25,15 @@ public class MutantController {
 	@Autowired
 	private MutantService mutantService;
 
+	/**
+	 * Checks the dna, save and return the result
+	 * @param mutantDto
+	 * The mutant dto with the dna to check
+	 * @return
+	 * [200-OK] -- if the dna belongs to a mutant.<br>
+	 * [403-FORBIDDEN] -- if the dna belongs to a normal human.<br>
+	 * [400-BAD_REQUEST] -- if the mutant dto has some validation errors.<br>
+	 */
 	@PostMapping(value = "/mutant", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> isMutant(@Validated(OrderedChecks.class) @RequestBody final MutantDto mutantDto) {
 		log.info("Is mutant?: {}", mutantDto);
@@ -39,6 +48,14 @@ public class MutantController {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 	}
 
+	/**
+	 * Get the statistical data from the evaluated dnas<br>
+	 * The number of mutants found<br>
+	 * The number of humans evaluated<br>
+	 * The ratio of mutants
+	 * @return
+	 * [200-OK] with the StatsDto data in the response body
+	 */
 	@GetMapping(value = "/stats", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StatsDto> stats() {
 		log.info("Getting stats");
