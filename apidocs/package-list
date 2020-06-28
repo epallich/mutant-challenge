@@ -1,0 +1,14 @@
+com.mercadolibre.challenge
+com.mercadolibre.challenge.algorithm
+com.mercadolibre.challenge.algorithm.impl
+com.mercadolibre.challenge.algorithm.impl.checkers
+com.mercadolibre.challenge.config
+com.mercadolibre.challenge.controller
+com.mercadolibre.challenge.domain
+com.mercadolibre.challenge.dto
+com.mercadolibre.challenge.handler
+com.mercadolibre.challenge.repository
+com.mercadolibre.challenge.service
+com.mercadolibre.challenge.service.impl
+com.mercadolibre.challenge.utils
+com.mercadolibre.challenge.validation
