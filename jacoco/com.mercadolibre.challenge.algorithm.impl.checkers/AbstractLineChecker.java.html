@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractLineChecker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">challenge</a> &gt; <a href="index.source.html" class="el_package">com.mercadolibre.challenge.algorithm.impl.checkers</a> &gt; <span class="el_source">AbstractLineChecker.java</span></div><h1>AbstractLineChecker.java</h1><pre class="source lang-java linenums">package com.mercadolibre.challenge.algorithm.impl.checkers;
+
+import static com.mercadolibre.challenge.ApplicationConstants.MIN_SEQUENCES;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The Abstract checker
+ * Find the lines and then check them with the pattern
+ * @author epallich
+ */
+
+<span class="fc" id="L16">@Slf4j</span>
+<span class="fc" id="L17">public abstract class AbstractLineChecker {</span>
+	private AbstractLineChecker next;
+
+<span class="fc" id="L20">	protected static final Pattern pattern = Pattern.compile(&quot;([A]{4})|([T]{4})|([C]{4})|([G]{4})&quot;);</span>
+
+	public AbstractLineChecker linkWith(AbstractLineChecker next) {
+<span class="fc" id="L23">		this.next = next;</span>
+<span class="fc" id="L24">		return next;</span>
+	}
+
+	/**
+	 * Get the lines of the new perspective
+	 * @param dna
+	 * The dna array
+	 * @return
+	 * the new lines
+	 */
+	protected abstract String[] getLines(String[] dna);
+
+	/**
+	 * Checks the lines in a particular way &lt;br&gt;
+	 * If the minimum amount of sequences is reached, returns true &lt;br&gt;
+	 * If not, delegates the task to the next checker &lt;br&gt;
+	 * If no more checkers, returns false &lt;br&gt;
+	 * @param dna
+	 * The dna array
+	 * @param amountOfSequences
+	 * The amount of sequences found until this moment (starts in 0)
+	 * @return
+	 * true if the dna belongs to a mutant or false if not
+	 */
+	public boolean checkDnaSequence(final String[] dna, int amountOfSequences) {
+
+		// Checking lines
+<span class="fc" id="L51">		amountOfSequences = checkLines(getLines(dna.clone()), amountOfSequences);</span>
+
+<span class="fc" id="L53">		boolean checkAmount = checkAmount(amountOfSequences);</span>
+<span class="fc bfc" id="L54" title="All 4 branches covered.">		if (checkAmount || next == null)</span>
+<span class="fc" id="L55">			return checkAmount;</span>
+
+<span class="fc" id="L57">		return next.checkDnaSequence(dna, amountOfSequences);</span>
+	}
+
+	/**
+	 * Checks the lines with the Pattern and return the amount of sequences found &lt;br&gt;
+	 * If the amount is equals to the MIN_SEQUENCES returns that value
+	 * @param sequence
+	 * The sequence array to check
+	 * @param amountOfSequences
+	 * The amount of sequences found until this moment
+	 * @return
+	 * The number of sequences passed as a parameter added to the sequences found in this method
+	 */
+	protected int checkLines(String[] sequence, int amountOfSequences) {
+<span class="fc" id="L71">		int index = 0;</span>
+<span class="fc bfc" id="L72" title="All 4 branches covered.">		while (amountOfSequences &lt; MIN_SEQUENCES &amp;&amp; index &lt; sequence.length) {</span>
+<span class="fc" id="L73">			Matcher matcher = pattern.matcher(sequence[index++]);</span>
+
+<span class="fc bfc" id="L75" title="All 4 branches covered.">			while (amountOfSequences &lt; MIN_SEQUENCES &amp;&amp; matcher.find()) {</span>
+<span class="fc" id="L76">				log.info(&quot;One sequence was found: &quot; + matcher.group());</span>
+<span class="fc" id="L77">				amountOfSequences++;</span>
+			}
+<span class="fc" id="L79">		}</span>
+
+<span class="fc" id="L81">		return amountOfSequences;</span>
+	}
+
+	private boolean checkAmount(int amountOfSequences) {
+<span class="fc bfc" id="L85" title="All 2 branches covered.">		return amountOfSequences &gt;= MIN_SEQUENCES;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VerticalChecker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">challenge</a> &gt; <a href="index.source.html" class="el_package">com.mercadolibre.challenge.algorithm.impl.checkers</a> &gt; <span class="el_source">VerticalChecker.java</span></div><h1>VerticalChecker.java</h1><pre class="source lang-java linenums">package com.mercadolibre.challenge.algorithm.impl.checkers;
+
+import java.util.List;
+
+import com.google.common.collect.Lists;
+import com.mercadolibre.challenge.utils.GlobalUtils;
+
+<span class="fc" id="L8">public final class VerticalChecker extends AbstractLineChecker {</span>
+
+	/**
+	 * Returns the vertical lines
+	 */
+	@Override
+	protected final String[] getLines(String[] dnaArray) {
+<span class="fc" id="L15">		int length = dnaArray.length;</span>
+
+<span class="fc" id="L17">		final String dnaSequence = GlobalUtils.join(dnaArray);</span>
+<span class="fc" id="L18">		final List&lt;String&gt; verticalLines = Lists.newArrayList();</span>
+
+<span class="fc bfc" id="L20" title="All 2 branches covered.">		for (int offset = 0; offset &lt; length; offset++) {</span>
+<span class="fc" id="L21">			StringBuilder diagonal = new StringBuilder();</span>
+
+<span class="fc bfc" id="L23" title="All 2 branches covered.">			for (int pivot = 0; pivot &lt; length; pivot++) {</span>
+<span class="fc" id="L24">				diagonal.append(dnaSequence.charAt(getIndex(length, offset, pivot)));</span>
+			}
+<span class="fc" id="L26">			verticalLines.add(diagonal.toString());</span>
+		}
+
+<span class="fc" id="L29">		return verticalLines.toArray(new String[0]);</span>
+	}
+
+	/**
+	 * Calculate and return the element[pivot] of the new line
+	 * @param length
+	 * The length of the line
+	 * @param offset
+	 * The vertical index (0,N)
+	 * @param pivot
+	 * The actual element index of the new line
+	 * @return
+	 * The calculated index
+	 */
+	private int getIndex(int length, int offset, int pivot) {
+<span class="fc" id="L44">		return (length * pivot) + offset;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

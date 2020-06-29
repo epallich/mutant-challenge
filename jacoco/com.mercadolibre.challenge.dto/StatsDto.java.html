@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StatsDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">challenge</a> &gt; <a href="index.source.html" class="el_package">com.mercadolibre.challenge.dto</a> &gt; <span class="el_source">StatsDto.java</span></div><h1>StatsDto.java</h1><pre class="source lang-java linenums">package com.mercadolibre.challenge.dto;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.ToString;
+
+<span class="fc" id="L10">@ToString</span>
+@SuppressWarnings(&quot;serial&quot;)
+public class StatsDto implements Serializable {
+
+	@JsonProperty(&quot;count_mutant_dna&quot;)
+	private Long mutantCount;
+
+	@JsonProperty(&quot;count_human_dna&quot;)
+	private Long humanCount;
+
+	private BigDecimal ratio;
+
+	public StatsDto() {
+<span class="fc" id="L23">		super();</span>
+<span class="fc" id="L24">	}</span>
+
+	public StatsDto(final Long mutantCount, final Long humanCount, final BigDecimal ratio) {
+<span class="fc" id="L27">		super();</span>
+<span class="fc" id="L28">		this.mutantCount = mutantCount;</span>
+<span class="fc" id="L29">		this.humanCount = humanCount;</span>
+<span class="fc" id="L30">		this.ratio = ratio;</span>
+<span class="fc" id="L31">	}</span>
+
+	public Long getMutantCount() {
+<span class="fc" id="L34">		return mutantCount;</span>
+	}
+
+	public void setMutantCount(final Long mutantCount) {
+<span class="fc" id="L38">		this.mutantCount = mutantCount;</span>
+<span class="fc" id="L39">	}</span>
+
+	public Long getHumanCount() {
+<span class="fc" id="L42">		return humanCount;</span>
+	}
+
+	public void setHumanCount(final Long humanCount) {
+<span class="fc" id="L46">		this.humanCount = humanCount;</span>
+<span class="fc" id="L47">	}</span>
+
+	public BigDecimal getRatio() {
+<span class="fc" id="L50">		return ratio;</span>
+	}
+
+	public void setRatio(final BigDecimal ratio) {
+<span class="fc" id="L54">		this.ratio = ratio;</span>
+<span class="fc" id="L55">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

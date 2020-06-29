@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutantController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">challenge</a> &gt; <a href="index.source.html" class="el_package">com.mercadolibre.challenge.controller</a> &gt; <span class="el_source">MutantController.java</span></div><h1>MutantController.java</h1><pre class="source lang-java linenums">package com.mercadolibre.challenge.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mercadolibre.challenge.domain.PersonType;
+import com.mercadolibre.challenge.dto.MutantDto;
+import com.mercadolibre.challenge.dto.StatsDto;
+import com.mercadolibre.challenge.service.MutantService;
+import com.mercadolibre.challenge.validation.OrderedChecks;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
+
+<span class="fc" id="L24">@Slf4j</span>
+@RestController
+<span class="fc" id="L26">public class MutantController {</span>
+
+	@Autowired
+	private MutantService mutantService;
+
+	/**
+	 * Checks the dna, save and return the result
+	 * @param mutantDto
+	 * The mutant dto with the dna to check
+	 * @return
+	 * [200-OK] -- if the dna belongs to a mutant.&lt;br&gt;
+	 * [403-FORBIDDEN] -- if the dna belongs to a normal human.&lt;br&gt;
+	 * [400-BAD_REQUEST] -- if the mutant dto has some validation errors.&lt;br&gt;
+	 */
+	//@formatter:off
+	@ApiOperation(value = &quot;Checks the given dna&quot;, response = Void.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;if the dna belongs to a mutant&quot;),
+            @ApiResponse(code = 403, message = &quot;if the dna belongs to a normal human&quot;),
+            @ApiResponse(code = 400, message = &quot;if the mutant dto has some validation errors&quot;)
+    	}
+    )
+	@PostMapping(value = &quot;/mutant&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	//@formatter:on
+	public ResponseEntity&lt;Void&gt; isMutant(@Validated(OrderedChecks.class) @RequestBody final MutantDto mutantDto) {
+<span class="fc" id="L51">		log.info(&quot;Is mutant?: {}&quot;, mutantDto);</span>
+
+<span class="fc" id="L53">		boolean isMutant = mutantService.isMutant(mutantDto);</span>
+
+<span class="fc" id="L55">		log.info(&quot;Result for [{}] = {}&quot;, mutantDto.getDna(), PersonType.getPersonType(isMutant));</span>
+
+<span class="fc bfc" id="L57" title="All 2 branches covered.">		if (isMutant) {</span>
+<span class="fc" id="L58">			return ResponseEntity.ok().build();</span>
+		}
+<span class="fc" id="L60">		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();</span>
+	}
+
+	/**
+	 * Get the statistical data from the evaluated dnas&lt;br&gt;
+	 * The number of mutants found&lt;br&gt;
+	 * The number of humans evaluated&lt;br&gt;
+	 * The ratio of mutants
+	 * @return
+	 * [200-OK] with the StatsDto data in the response body
+	 */
+	//@formatter:off
+	@ApiOperation(value = &quot;Get the statistical data from the evaluated dnas&quot;, response = StatsDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = &quot;Returns a json with the amount of mutans, the total of evaluated humans and the ratio&quot;)
+    	}
+    )
+	@GetMapping(value = &quot;/stats&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+	//@formatter:on
+	public ResponseEntity&lt;StatsDto&gt; stats() {
+<span class="fc" id="L80">		log.info(&quot;Getting stats&quot;);</span>
+
+<span class="fc" id="L82">		StatsDto statsDto = mutantService.getStats();</span>
+
+<span class="fc" id="L84">		log.info(&quot;Returning stats: {}&quot;, statsDto);</span>
+<span class="fc" id="L85">		return ResponseEntity.ok(statsDto);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

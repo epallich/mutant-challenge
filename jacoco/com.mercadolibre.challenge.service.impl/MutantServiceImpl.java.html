@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutantServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">challenge</a> &gt; <a href="index.source.html" class="el_package">com.mercadolibre.challenge.service.impl</a> &gt; <span class="el_source">MutantServiceImpl.java</span></div><h1>MutantServiceImpl.java</h1><pre class="source lang-java linenums">package com.mercadolibre.challenge.service.impl;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import com.mercadolibre.challenge.algorithm.impl.MutantFinderImpl;
+import com.mercadolibre.challenge.domain.Person;
+import com.mercadolibre.challenge.domain.PersonType;
+import com.mercadolibre.challenge.dto.MutantDto;
+import com.mercadolibre.challenge.dto.StatsDto;
+import com.mercadolibre.challenge.repository.PersonRepository;
+import com.mercadolibre.challenge.service.MutantService;
+import com.mercadolibre.challenge.utils.GlobalUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The implementation of the MutantService interface
+ * @author epallich
+ */
+<span class="fc" id="L25">@Slf4j</span>
+@Service
+<span class="fc" id="L27">public class MutantServiceImpl implements MutantService {</span>
+
+	@Autowired
+	private PersonRepository personRepository;
+
+	/**
+	 * This method has a fixed size cache&lt;br&gt;
+	 * If the dna was previously checked and exists in the cache, all the processing is avoided and returns the previous result&lt;br&gt;
+	 * If not exists in the cache, the dna is processed and saved the result
+	 */
+	@Override
+	@Cacheable(value = &quot;mutant_cache&quot;, key = &quot;#mutantDto.dna&quot;)
+	public boolean isMutant(MutantDto mutantDto) {
+
+<span class="fc" id="L41">		final String[] dna = mutantDto.getDna().toArray(new String[0]);</span>
+
+<span class="fc" id="L43">		boolean isMutant = MutantFinderImpl.INSTANCE.isMutant(dna);</span>
+
+<span class="fc" id="L45">		savePerson(dna, isMutant);</span>
+
+<span class="fc" id="L47">		return isMutant;</span>
+	}
+
+	/**
+	 * This method save the person.
+	 * @param dna
+	 * the dna sequence of the person
+	 * @param isMutant
+	 * the processed result
+	 */
+	private void savePerson(final String[] dna, boolean isMutant) {
+<span class="fc" id="L58">		Person person = new Person(PersonType.getPersonType(isMutant), GlobalUtils.join(dna));</span>
+<span class="fc" id="L59">		log.info(&quot;Saving new Person: [{}]&quot;, person);</span>
+<span class="fc" id="L60">		personRepository.save(person);</span>
+<span class="fc" id="L61">	}</span>
+
+	@Override
+	public StatsDto getStats() {
+<span class="fc" id="L65">		Long mutantCount = personRepository.countByType(PersonType.MUTANT.name());</span>
+<span class="fc" id="L66">		Long normalCount = personRepository.countByType(PersonType.NORMAL.name());</span>
+
+<span class="fc" id="L68">		return toStatDto(mutantCount, mutantCount + normalCount);</span>
+	}
+
+	private StatsDto toStatDto(Long mutantCount, Long humanCount) {
+<span class="fc" id="L72">		return new StatsDto(mutantCount, humanCount, getRatio(mutantCount, humanCount));</span>
+	}
+
+	/**
+	 * Returns the calculated ratio &lt;br&gt;
+	 * Mutant count / Human count &lt;br&gt;
+	 * -- 0 / 0 == 0 &lt;br&gt;
+	 * -- x / y == the division rounded &lt;br&gt;
+	 * @param mutantCount
+	 * The mutant count
+	 * @param humanCount
+	 * The total human count (including the mutants)
+	 * @return
+	 * The calculated mutant ratio
+	 */
+	private BigDecimal getRatio(Long mutantCount, Long humanCount) {
+<span class="fc" id="L88">		BigDecimal ratio = BigDecimal.ZERO;</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">		if (humanCount &gt; 0) {</span>
+<span class="fc" id="L90">			ratio = BigDecimal.valueOf(mutantCount).divide(BigDecimal.valueOf(humanCount), 2, RoundingMode.HALF_UP);</span>
+		}
+<span class="fc" id="L92">		return ratio;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
