@@ -5,8 +5,12 @@
 
 Al diseñar la solución pensé en una arquitectura basada en microservicios, en donde para llegar a cubrir el objetivo de un millón de request por segundo sería necesario escalar horizontalmente hasta poder satisfacer dicha demanda.
 Cabe aclarar que el servicio es stateless, ya que solo se preocupa de ejecutar un algoritmo para reconocer un patrón y devolver un resultado. El estado se encuentra en la base de datos elegida, Cassandra.
+
 Se eligió Cassandra ya que permite el almacenamiento de grandes cantidades de datos de una manera distribuida, con alta disponibilidad y un gran rendimiento. Por lo cual también sería necesario contar con un cluster de estos nodos.
+
 Cada microservicio cuenta con una cache interna limitada por tamaño, que almacena de manera temporal (cache efímera) los ADN verificados. El objetivo de ésta cache es evitar ataques de denegación de servicio sencillos, como ser el de enviar reiteradas veces a analizar el mismo ADN.
+
+Para la creación del microservicio se utilizó Spring Boot en su última versión estable (2.3.1) y java 8.
 
 
 ## Componentes
@@ -14,8 +18,8 @@ Cada microservicio cuenta con una cache interna limitada por tamaño, que almace
 1. El código fuente
 2. [JavaDocs](/apidocs) de la API
 3. Se incluye un excel explicando la lógica del algoritmo. ([Lógica-Algoritmo](./Logica-Algoritmo.xlsx))
-4. [Test unitarios](/src/test) Los tests que necesitan levantar el contexto de Spring utilizan una base cassandra en memoria. ([cassandra-unit](https://github.com/jsevellec/cassandra-unit))
-5. Reporte de coverage mediante *jacoco-maven-plugin* ([Rerporte](/jacoco))
+4. [Test unitarios: ](/src/test) Los tests que necesitan levantar el contexto de Spring utilizan una base cassandra en memoria. ([cassandra-unit](https://github.com/jsevellec/cassandra-unit))
+5. Reporte de coverage mediante *jacoco-maven-plugin* ([Reporte](/jacoco))
 
 
 ## API hosteada en Amazon AWS
