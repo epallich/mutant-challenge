@@ -24,7 +24,7 @@
 
 		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
 
-		<cassandra.all.version>3.11.4</cassandra.all.version>
+		<cassandra.all.version>3.11.12</cassandra.all.version>
 		<cassandra.unit.spring.version>4.3.1.0</cassandra.unit.spring.version>
 
 		<!-- Plugin Versions -->
